@@ -1,8 +1,8 @@
 
 drop table if exists ezyweb_user;
 
-/* Create tables. */
-/* Note: Don't put a comma after last field */
+/* 테이블을 생성한다. */
+/* 노트: 마지막 필드 뒤에 쉼표를 붙이지 않는다 */
 
 create table ezyweb_user
 (

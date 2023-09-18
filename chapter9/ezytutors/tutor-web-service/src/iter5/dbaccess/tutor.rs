@@ -3,12 +3,12 @@ use crate::models::tutor::{NewTutor, Tutor, UpdateTutor};
 use sqlx::postgres::PgPool;
 
 pub async fn get_all_tutors_db(pool: &PgPool) -> Result<Vec<Tutor>, EzyTutorError> {
-    // Prepare SQL statement
+    // SQL 구문을 준비한다
     let tutor_rows =
         sqlx::query!("SELECT tutor_id, tutor_name, tutor_pic_url, tutor_profile FROM ezy_tutor_c6")
             .fetch_all(pool)
             .await?;
-    // Extract result
+    // 결과를 추출한다
 
     let tutors: Vec<Tutor> = tutor_rows
         .iter()
@@ -25,10 +25,10 @@ pub async fn get_all_tutors_db(pool: &PgPool) -> Result<Vec<Tutor>, EzyTutorErro
     }
 }
 
-//Return result
+// 결과를 반환한다
 
 pub async fn get_tutor_details_db(pool: &PgPool, tutor_id: i32) -> Result<Tutor, EzyTutorError> {
-    // Prepare SQL statement
+    // SQL 구문을 준비한다
     let tutor_row = sqlx::query!(
         "SELECT tutor_id, tutor_name, tutor_pic_url, tutor_profile FROM ezy_tutor_c6 where tutor_id = $1 order by tutor_id desc",
         tutor_id
@@ -52,7 +52,7 @@ pub async fn update_tutor_details_db(
     tutor_id: i32,
     change_tutor: UpdateTutor,
 ) -> Result<Tutor, EzyTutorError> {
-    // Retrieve current tutor record:
+    // 현재 강사 레코드를 꺼낸다
     let tutor_row = sqlx::query!(
     "SELECT tutor_id, tutor_name, tutor_pic_url, tutor_profile FROM ezy_tutor_c6 where tutor_id = $1",
     tutor_id
@@ -80,7 +80,7 @@ pub async fn update_tutor_details_db(
         },
     };
 
-    // Prepare SQL statement
+    // SQL 구문을 준비한다
     let tutor_updated_row = sqlx::query!(
         "UPDATE ezy_tutor_c6 SET tutor_name = $1, tutor_pic_url=$2, tutor_profile=$3 where tutor_id = $4 returning tutor_id, tutor_name, tutor_pic_url, tutor_profile", 
         new_tutor_record.tutor_name, new_tutor_record.tutor_pic_url, new_tutor_record.tutor_profile, tutor_id
@@ -102,7 +102,7 @@ pub async fn post_new_tutor_db(pool: &PgPool, new_tutor: NewTutor) -> Result<Tut
     let tutor_row = sqlx::query!("insert into ezy_tutor_c6 (tutor_name, tutor_pic_url, tutor_profile) values ($1,$2,$3) returning tutor_id, tutor_name, tutor_pic_url, tutor_profile", new_tutor.tutor_name, new_tutor.tutor_pic_url, new_tutor.tutor_profile)
     .fetch_one(pool)
     .await?;
-    //Retrieve result
+    // 결과를 꺼낸다
     Ok(Tutor {
         tutor_id: tutor_row.tutor_id,
         tutor_name: tutor_row.tutor_name,
@@ -111,9 +111,9 @@ pub async fn post_new_tutor_db(pool: &PgPool, new_tutor: NewTutor) -> Result<Tut
     })
 }
 
-// Delete tutor
+// 강사를 삭제한다
 pub async fn delete_tutor_db(pool: &PgPool, tutor_id: i32) -> Result<String, EzyTutorError> {
-    // Prepare SQL statement
+    // SQL 구문을 준비한다
     let tutor_row = sqlx::query(&format!(
         "DELETE FROM ezy_tutor_c6 where tutor_id = {}",
         tutor_id

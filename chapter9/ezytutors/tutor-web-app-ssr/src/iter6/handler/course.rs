@@ -67,7 +67,7 @@ pub async fn handle_update_course(
     Ok(HttpResponse::Ok().json(course_response))
 }
 
-// Handler function to delete a course for a tutor_id
+// tutor_id의 하나의 강의를 삭제하는 핸들러 함수
 pub async fn handle_delete_course(
     _tmpl: web::Data<tera::Tera>,
     _app_state: web::Data<AppState>,

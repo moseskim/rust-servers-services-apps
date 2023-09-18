@@ -3,7 +3,7 @@ use actix_web::web::Data;
 use serde::{Deserialize, Serialize};
 use tera::Tera;
 
-// store tera template in application state
+// Tera 템플릿을 애플리케이션 상태에 저장한다
 async fn index(tmpl: web::Data<tera::Tera>) -> Result<HttpResponse, Error> {
     let s = tmpl
         .render("form.html", &tera::Context::new())
@@ -52,7 +52,7 @@ fn app_config(config: &mut web::ServiceConfig) {
     );
 }
 
-// test cases
+// 테스트 케이스
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -63,7 +63,7 @@ mod tests {
     use actix_web::dev::{Service, ServiceResponse};
     use actix_web::test::{self};
 
-    // Unit test case
+    // 단위 테스트 케이스
     #[actix_rt::test]
     async fn handle_post_1_unit_test() {
         let params = Form(Tutor {
@@ -80,7 +80,7 @@ mod tests {
         );
     }
 
-    // Integration test case
+    // 통합 테스트 케이스
     #[actix_rt::test]
     async fn handle_post_1_integration_test() {
         let tera = Tera::new(concat!(env!("CARGO_MANIFEST_DIR"), "/static/iter2/**/*")).unwrap();
