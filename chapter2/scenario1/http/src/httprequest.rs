@@ -19,26 +19,26 @@ impl From<String> for HttpRequest {
         let mut parsed_headers = HashMap::new();
         let mut parsed_msg_body = "";
 
-        // Read each line in incoming HTTP request
+        // 유입되는 HTTP 요청의 각 행을 읽는다
         for line in req.lines() {
-            // If the line read is request line, call function process_req_line()
+            // 해당 행이 요청 행이면 process_req_line() 함수를 호출한다
             if line.contains("HTTP") {
                 let (method, resource, version) = process_req_line(line);
                 parsed_method = method;
                 parsed_version = version;
                 parsed_resource = resource;
-            // If the line read is header line, call function process_header_line()
+            // 해당 행이 헤더 행이면 process_header_line() 함수를 호출한다
             } else if line.contains(":") {
                 let (key, value) = process_header_line(line);
                 parsed_headers.insert(key, value);
-            //  If it is blank line, do nothing
+            //  해당 행이 빈 행이면 아무 것도 하지 않는다
             } else if line.len() == 0 {
-                // If none of these, treat it as message body
+                // 위의 어떤 행도 아니면 메시지 바디로 취급한다
             } else {
                 parsed_msg_body = line;
             }
         }
-        // Parse the incoming HTTP request into HttpRequest struct
+        // 유입된 HTTP 요청을 HttpReqeust 구조체로 파싱한다
         HttpRequest {
             method: parsed_method,
             version: parsed_version,
@@ -49,13 +49,13 @@ impl From<String> for HttpRequest {
     }
 }
 fn process_req_line(s: &str) -> (Method, Resource, Version) {
-    // Parse the request line into individual chunks split by whitespaces.
+    // 요청 행을 공백으로 구분된 개별 덩어리로 파싱한다
     let mut words = s.split_whitespace();
-    // Extract the HTTP method from first part of the request line
+    // 요청 행의 첫 번째 부분에서 HTTP 메서드를 추출한다
     let method = words.next().unwrap();
-    // Extract the resource (URI/URL) from second part of the request line
+    // 요청 행의 두 번째 부분에서 리소스(URI/URL)을 추출한다
     let resource = words.next().unwrap();
-    // Extract the HTTP version from third part of the request line
+    // 요청 행의 세 번째 부분에서 HTTP 버전을 추출한다
     let version = words.next().unwrap();
 
     (
@@ -65,15 +65,15 @@ fn process_req_line(s: &str) -> (Method, Resource, Version) {
     )
 }
 fn process_header_line(s: &str) -> (String, String) {
-    // Parse the headerline into words split by separator (':')
+    // 헤더 행을 구분자(';')로 나눠진 단어로 파싱한다
     let mut header_items = s.split(":");
     let mut key = String::from("");
     let mut value = String::from("");
-    // Extract the key part of the header
+    // 헤도의 키 부분을 추출한다
     if let Some(k) = header_items.next() {
         key = k.to_string();
     }
-    // Extract the value part of the header
+    // 헤더의 값 부분을 추출한다
     if let Some(v) = header_items.next() {
         value = v.to_string()
     }
