@@ -1,9 +1,9 @@
-/* Drop tables if they already exist*/
+/* 테이블이 존재하면 삭제한다 */
 
 drop table if exists ezy_course_c6;
 
-/* Create tables. */
-/* Note: Don't put a comma after last field */
+/* 테이블을 생성한다. */
+/* 노트: 마지막 필드 뒤에 쉼표를 붙이지 않는다 */
 
 create table ezy_course_c6
 (
