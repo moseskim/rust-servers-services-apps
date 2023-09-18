@@ -1,5 +1,5 @@
 
-// Listing 8.x - start
+// Listing 8.x - 시작
 
 use actix_files as fs;
 use actix_web::{App, HttpServer};
@@ -15,4 +15,4 @@ async fn main() -> std::io::Result<()> {
     .await
 }
 
-// Listing 8.x - end
+// Listing 8.x - 끝

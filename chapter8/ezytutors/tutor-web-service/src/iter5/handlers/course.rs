@@ -71,7 +71,7 @@ mod tests {
     use std::env;
     use std::sync::Mutex;
 
-    // Get list of all courses for a tutor
+    // 한 강사에 대한 모든 강의 목록을 얻는다
     #[actix_rt::test]
     async fn get_all_courses_success() {
         dotenv().ok();
@@ -86,7 +86,7 @@ mod tests {
         let resp = get_courses_for_tutor(app_state, tutor_id).await.unwrap();
         assert_eq!(resp.status(), StatusCode::OK);
     }
-    // Get course details for valid course id.
+    // 유효한 강의id에 대한 모든 강의 상세 정보를 얻는다
     #[actix_rt::test]
     async fn get_course_detail_success_test() {
         dotenv().ok();
@@ -101,8 +101,8 @@ mod tests {
         let resp = get_course_details(app_state, parameters).await.unwrap();
         assert_eq!(resp.status(), StatusCode::OK);
     }
-    // Run with cargo test -- --nocapture
-    // Get course details with invalid course id.
+    // cargo test -- --nocapture 와 함께 실행한다
+    // 유효하지 않은 강의 id를 사용해 가의 상세 정보를 얻느다
     #[actix_rt::test]
     async fn get_course_detail_failure_test() {
         dotenv().ok();
@@ -120,7 +120,7 @@ mod tests {
             Err(err) => assert_eq!(err.status_code(), StatusCode::NOT_FOUND),
         }
     }
-    // Post a new course successfully
+    // 새로운 강의를 성공적으로 등록한다
     //#[ignore]
     #[actix_rt::test]
     async fn post_course_success() {
@@ -147,7 +147,7 @@ mod tests {
         let resp = post_new_course(course_param, app_state).await.unwrap();
         assert_eq!(resp.status(), StatusCode::OK);
     }
-    // Update course successfully
+    // 강의를 성공적으로 업데이트한다
     #[actix_rt::test]
     async fn update_course_success() {
         dotenv().ok();
@@ -175,7 +175,7 @@ mod tests {
             .unwrap();
         assert_eq!(resp.status(), StatusCode::OK);
     }
-    // Delete course successfully
+    // 강의를 삭제한다 successfully
     //#[ignore]
     #[actix_rt::test]
     async fn delete_test_success() {
@@ -191,7 +191,7 @@ mod tests {
         let resp = delete_course(app_state, parameters).await.unwrap();
         assert_eq!(resp.status(), StatusCode::OK);
     }
-    // Delete test failure
+    // 테스트 실패를 삭제한다
     #[actix_rt::test]
     async fn delete_test_failure() {
         dotenv().ok();

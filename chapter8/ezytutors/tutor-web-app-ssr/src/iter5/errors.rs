@@ -1,5 +1,5 @@
 
-// Listing 8.2 - start
+// Listing 8.2 - 시작
 
 use actix_web::{error, http::StatusCode, HttpResponse, Result};
 use serde::Serialize;
@@ -76,4 +76,4 @@ impl From<SQLxError> for EzyTutorError {
     }
 }
 
-// Listing 8.2 - end
+// Listing 8.2 - 끝

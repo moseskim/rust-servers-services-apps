@@ -31,7 +31,7 @@ pub async fn handle_register(
     let username = params.username.clone();
     let user = get_user_record(&app_state.db, username.to_string()).await;
     let user_not_found: bool = user.is_err();
-    // If user is not found in database, proceed to verification of passwords
+    // 데이터베이스에서 사용자를 발견하지 못하면 비밀번호 검증을 진행한다
     if user_not_found {
         if params.password != params.confirmation {
             ctx.insert("error", "Passwords do not match");
@@ -60,7 +60,7 @@ pub async fn handle_register(
                 .await?;
             let tutor_response: TutorResponse = serde_json::from_str(&std::str::from_utf8(&res)?)?;
             s = format!("Congratulations. You have been successfully registered with EzyTutor and your tutor id is: {}. To start using EzyTutor, please login with your credentials.",tutor_response.tutor_id);
-            // Hash the password
+            // 비밀번호를 해시화한다
             let salt = b"somerandomsalt";
             let config = Config::default();
             let hash =

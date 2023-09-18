@@ -1,5 +1,5 @@
 
-// Listing 7.0 - start
+// Listing 7.0 - 시작
 
 use crate::handler::{handle_register, show_register_form};
 use actix_files as fs;
@@ -14,4 +14,4 @@ pub fn app_config(config: &mut web::ServiceConfig) {
     );
 }
 
-// Listing 7.0 - end
+// Listing 7.0 - 끝
