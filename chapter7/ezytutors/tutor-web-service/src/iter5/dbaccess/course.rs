@@ -6,7 +6,7 @@ pub async fn get_courses_for_tutor_db(
     pool: &PgPool,
     tutor_id: i32,
 ) -> Result<Vec<Course>, EzyTutorError> {
-    // Prepare SQL statement
+    // SQL 구문을 준비한다
 
     let course_rows: Vec<Course> = sqlx::query_as!(
         Course,
@@ -19,14 +19,14 @@ pub async fn get_courses_for_tutor_db(
     Ok(course_rows)
 }
 
-//Return result
+// 결과를 반환한다
 
 pub async fn get_course_details_db(
     pool: &PgPool,
     tutor_id: i32,
     course_id: i32,
 ) -> Result<Course, EzyTutorError> {
-    // Prepare SQL statement
+    // SQL 구문을 준비한다
     let course_row = sqlx::query_as!(
         Course,
         "SELECT * FROM ezy_course_c6 where tutor_id = $1 and course_id = $2",
@@ -56,13 +56,13 @@ pub async fn post_new_course_db(
     Ok(course_row)
 }
 
-// Delete course
+// 강의를 삭제한다
 pub async fn delete_course_db(
     pool: &PgPool,
     tutor_id: i32,
     course_id: i32,
 ) -> Result<String, EzyTutorError> {
-    // Prepare SQL statement
+    // SQL 구문을 준비한다
     let course_row = sqlx::query!(
         "DELETE FROM ezy_course_c6 where tutor_id = $1 and course_id = $2",
         tutor_id,
@@ -73,14 +73,14 @@ pub async fn delete_course_db(
     Ok(format!("Deleted {:#?} record", course_row))
 }
 
-// Update course details
+// 강의 상세 정보를 업데이트한다
 pub async fn update_course_details_db(
     pool: &PgPool,
     tutor_id: i32,
     course_id: i32,
     update_course: UpdateCourse,
 ) -> Result<Course, EzyTutorError> {
-    // Retrieve current record
+    // 현재 레코드를 꺼낸다
 
     let current_course_row = sqlx::query_as!(
         Course,
@@ -92,7 +92,7 @@ pub async fn update_course_details_db(
     .await
     .map_err(|_err| EzyTutorError::NotFound("Course id not found".into()))?;
 
-    // Construct the parameters for update:
+    // 업데이트를 위한 매개변수를 만든다
 
     let name: String = if let Some(name) = update_course.course_name {
         name
@@ -135,7 +135,7 @@ pub async fn update_course_details_db(
         current_course_row.course_price.unwrap_or_default()
     };
 
-    // Prepare SQL statement
+    // SQL 구문을 준비한다
     let course_row =
         sqlx::query_as!(
         Course,

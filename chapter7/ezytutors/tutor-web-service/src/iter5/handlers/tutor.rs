@@ -33,7 +33,7 @@ pub async fn post_new_tutor(
         .map(|tutor| HttpResponse::Ok().json(tutor))
 }
 
-// Update tutor details
+// 강사 상세 정보를 업데이트한다
 /*
 curl -X PUT localhost:3000/tutors/4 -H "Content-Type: application/json"  -d '{"tutor_name":"James", "tutor_pic_url":"http://james.com/pic","tutor_profile":"Expert in thermodynamics"}'
 */
@@ -119,7 +119,7 @@ mod tests {
         let resp = post_new_tutor(tutor_param, app_state).await.unwrap();
         assert_eq!(resp.status(), StatusCode::OK);
     }
-    // Delete tutor
+    // 강사를 삭제한다
     #[actix_rt::test]
     async fn delete_tutor_success_test() {
         dotenv().ok();

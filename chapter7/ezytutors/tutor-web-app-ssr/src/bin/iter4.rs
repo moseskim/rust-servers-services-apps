@@ -19,11 +19,11 @@ pub struct Tutor {
 async fn handle_get_tutors(tmpl: web::Data<tera::Tera>) -> Result<HttpResponse, Error> {
     let client = Client::new(); // Client::default();
 
-    // Create request builder and send request
+    // 요정 빌더를 생성하고 요청을 보낸다
 
     let response = client
         .get("http://localhost:3000/tutors/")
-        .send() // <- Send request
+        .send() // <- 요청을 저송한다
         .await
         .unwrap()
         .body()
