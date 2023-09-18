@@ -2,7 +2,7 @@ use super::models::Course;
 use sqlx::postgres::PgPool;
 
 pub async fn get_courses_for_tutor_db(pool: &PgPool, tutor_id: i32) -> Vec<Course> {
-    // Prepare SQL statement
+    // SQL 구문을 준비한다
     let course_rows = sqlx::query!(
         "SELECT tutor_id, course_id, course_name, posted_time FROM ezy_course_c4 where tutor_id = $1",
         tutor_id
@@ -10,7 +10,7 @@ pub async fn get_courses_for_tutor_db(pool: &PgPool, tutor_id: i32) -> Vec<Cours
     .fetch_all(pool)
     .await
     .unwrap();
-    // Extract result
+    // 결과를 추출한다
     course_rows
         .iter()
         .map(|course_row| Course {
@@ -22,10 +22,9 @@ pub async fn get_courses_for_tutor_db(pool: &PgPool, tutor_id: i32) -> Vec<Cours
         .collect()
 }
 
-//Return result
-
+// 결과를 반환한다
 pub async fn get_course_details_db(pool: &PgPool, tutor_id: i32, course_id: i32) -> Course {
-    // Prepare SQL statement
+    // SQL 구문을 준비한다
     let course_row = sqlx::query!(
         "SELECT tutor_id, course_id, course_name, posted_time FROM ezy_course_c4 where tutor_id = $1 and course_id = $2",
         tutor_id, course_id
@@ -33,7 +32,7 @@ pub async fn get_course_details_db(pool: &PgPool, tutor_id: i32, course_id: i32)
     .fetch_one(pool)
     .await
     .unwrap();
-    // Execute query
+    // 쿼리를 실행한다
     Course {
         course_id: course_row.course_id,
         tutor_id: course_row.tutor_id,
@@ -57,7 +56,7 @@ pub async fn post_new_course_db(pool: &PgPool, new_course: Course) -> Course {
     .fetch_one(pool)
     .await
     .unwrap();
-    //Retrieve result
+    // 결과를 꺼낸다
     Course {
         course_id: course_row.course_id,
         tutor_id: course_row.tutor_id,

@@ -1,36 +1,38 @@
-## Chapter 7 - Introduction to server-side webapps in Rust
+## 7장 러스트를 사용한 서버-사이드 웹앱 도입
 
-#### Example 1: Serve a static web page
+#### 예제 1: 정적 웹 페이지 제공하기
 
-From root folder of __tutor-web-app-ssr__, run:
+`tutor-web-app-ssr`의 루트 폴더에서 다음을 실행한다.
+
 ```
 cargo run --bin iter1
 ```
-From a browser:  
+
+브라우저에서 다음 URL로 방문한다.
 
 ```
 http://localhost:8080/static/static-web-page.html
 ```
 
-#### Example 2: Serve a dynamic web page
+#### 예제 2: 동적 웹 페이지 제공하기
 
 ```
 cargo run --bin iter1
 ```
 
-From a browser:
+브라우저에서 다음 URL로 방문한다.
 
 ````
 http://localhost:8080/
 ````
 
-#### Example 3: Accept user input with forms
+#### 예제 3: 폼을 통해 사용자 입력을 받는다
 
 ```
 cargo run --bin iter2
 ```
 
-From a browser: 
+브라우저에서 다음 URL로 방문한다.
 
 ```
  http://localhost:8080/

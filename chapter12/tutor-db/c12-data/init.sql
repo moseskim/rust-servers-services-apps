@@ -6,13 +6,13 @@ ALTER USER postgres WITH PASSWORD 'postgres';
 ALTER USER truuser  with PASSWORD 'trupwd';
 
 
-/* Drop tables if they already exist*/
+/* 테이블이 존재하면 삭제한다 */
 
 drop table if exists ezy_course_c6 cascade;
 drop table if exists ezy_tutor_c6;
 
-/* Create tables. */
-/* Note: Don't put a comma after last field */
+/* 테이블을 생성한다. */
+/* 노트: 마지막 필드 뒤에 쉼표를 붙이지 않는다 */
 
 create table ezy_tutor_c6 (
     tutor_id serial primary key,
@@ -43,7 +43,8 @@ grant all privileges on table ezy_tutor_c6 to truuser;
 grant all privileges on table ezy_course_c6 to truuser;
 
 
-/* Load seed data for testing */
+/* 테스팅을 위한 시드 데이터를 로드한다 
+ */
 insert into ezy_tutor_c6(tutor_id, tutor_name, tutor_pic_url,tutor_profile)
 values(1,'Merlene','http://s3.amazon.aws.com/pic1','Merlene is an experienced finance professional');
 

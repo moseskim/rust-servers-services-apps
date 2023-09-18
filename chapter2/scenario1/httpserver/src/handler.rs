@@ -35,10 +35,10 @@ impl Handler for PageNotFoundHandler {
 }
 impl Handler for StaticPageHandler {
     fn handle(req: &HttpRequest) -> HttpResponse {
-        // Get the path of static page resource being requested
+        // 요청된 정적 페이지 리소스의 경로를 얻는다
         let http::httprequest::Resource::Path(s) = &req.resource;
 
-        // Parse the URI
+        // URI를 파싱한다
         let route: Vec<&str> = s.split("/").collect();
         match route[1] {
             "" => HttpResponse::new("200", None, Self::load_file("index.html")),
@@ -61,7 +61,7 @@ impl Handler for StaticPageHandler {
     }
 }
 
-// Define a load_json() method to load orders.json file from disk
+// load_json() 메서드를 정의한다. 이 메서드는 디스크에서 orders.json 파일을 로드한다
 impl WebServiceHandler {
     fn load_json() -> Vec<OrderStatus> {
         let default_path = format!("{}/data", env!("CARGO_MANIFEST_DIR"));
@@ -73,14 +73,14 @@ impl WebServiceHandler {
         orders
     }
 }
-// Implement the Handler trait
+// Handler 트레이트를 구현한다
 impl Handler for WebServiceHandler {
     fn handle(req: &HttpRequest) -> HttpResponse {
         let http::httprequest::Resource::Path(s) = &req.resource;
 
-        // Parse the URI
+        // URI를 파싱한다
         let route: Vec<&str> = s.split("/").collect();
-        // if route if /api/shipping/orders, return json
+        // 라우트가 /api/shipping/orders이면 JSON을 반환한다
         match route[2] {
             "shipping" if route.len() > 2 && route[3] == "orders" => {
                 let body = Some(serde_json::to_string(&Self::load_json()).unwrap());

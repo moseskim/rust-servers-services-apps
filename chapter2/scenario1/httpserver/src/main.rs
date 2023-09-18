@@ -3,8 +3,8 @@ mod router;
 mod server;
 use server::Server;
 fn main() {
-    // Start a server
+    // 서버를 시작한다
     let server = Server::new("localhost:3000");
-    //Run the server
+    // 서버를 실행한다
     server.run();
 }

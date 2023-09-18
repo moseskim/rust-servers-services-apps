@@ -1,14 +1,14 @@
-/* Drop tables if they already exist*/
+/* 테이블이 존재하면 삭제한다 */
 
 drop table if exists ezy_course_c6 cascade;
 drop table if exists ezy_tutor_c6;
 
-/* Drop app user if it exists and recreate it */
+/* app 사용자가 존재하면 삭재하고 재생성한다 */
 drop user if exists truuser;
 create user truuser with password 'trupwd';
 
-/* Create tables. */
-/* Note: Don't put a comma after last field */
+/* 테이블을 생성한다. */
+/* 노트: 마지막 필드 뒤에 쉼표를 붙이지 않는다 */
 
 create table ezy_tutor_c6 (
     tutor_id serial primary key,
@@ -36,7 +36,7 @@ create table ezy_course_c6
         ON DELETE cascade
 );
 
-/* Grant privileges to specific user */
+/* 지정한 사용자에게 privileges를 부여한다 ㄴ*/
 grant all privileges on table ezy_tutor_c6 to truuser;
 grant all privileges on table ezy_course_c6 to truuser;
 grant all privileges on all sequences in schema public to truuser;
@@ -45,7 +45,8 @@ grant all privileges on all sequences in schema public to truuser;
 SELECT setval('ezy_course_c6_course_id_seq', 1);
 SELECT setval('ezy_tutor_c6_tutor_id_seq', 1);
 
-/* Load seed data for testing */
+/* 테스팅을 위한 시드 데이터를 로드한다 
+ */
 insert into ezy_tutor_c6(tutor_id, tutor_name, tutor_pic_url,tutor_profile)
 values(1,'Merlene','http://s3.amazon.aws.com/pic1','Merlene is an experienced finance professional');
 

@@ -1,12 +1,11 @@
-// Environment imports
+// 환경 임포트
 use dotenv::dotenv;
 use std::env;
-// Standard lib imports
+// 표준 라이브러리 임포트
 use std::io;
-// SQLx imports
-
+// SQLx 임포트
 use sqlx::postgres::PgPool;
-//Utilities
+// 유틸리티
 use chrono::NaiveDateTime;
 
 #[derive(Debug)]

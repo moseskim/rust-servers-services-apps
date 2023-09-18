@@ -1,23 +1,29 @@
-## Chapter 8 - Working with templates for tutor registration
+## 8장 - 강사 등록을 위한 템플릿 다루기
 
-From root folder of __tutor-web-app-ssr__, run:
+`tutor-web-app-ssr` 루트 폴더에서 다음을 실행한다.
+
 ```
 cargo run --bin iter5-ssr
 ```
 
-From root folder of __tutor-web-service__, run:
+`tutor-web-service` 루트 폴더에서 다음을 실행한다.
+
 ```
 cargo run --bin iter5
 ```
 
-From a browser, access the following URL to see the home screen of the tutor web app. Change the port number to the value set in the ```.env``` file.
+브라우저에서 다음 URL에 접근하면 tutor 웹 앱의 홈 스크린을 확인할 수 있다. `.env` 파일에 설정된 포트 번호를 사용한다.
+
 ```
 localhost:8080/
 ```
 
-Further instructions can be found within the chapter.  
+자세한 설명은 책 8장의 내용을 참조한다.
 
-#### Debugging tips
-1. In case of difficulty in building any of these two servers due to missing/inconsistent dependencies, delete the ```cargo.lock``` file and ```target``` folder in that project folder, and rebuild.  
-2. In case of difficulty in running the servers or getting back expected responses, check to ensure that there are separate ```.env``` files, one each for __tutor-web-app-ssr__ and __tutor-web-service__. The ```.env``` file in each project should contain the respective values for ```HOST_PORT``` and ```DATABASE_URL```.  
-3. In case of errors in retrieving data from the database, check if the database scripts for table creation in postgres have been executed.
+### 디버깅 팁
+
+1. 디펜던시 누락 및 미일치로 인해 두 서버를 빌드하는 데 문제가 발생한다면 프로젝트 폴더에서 `cargo.lock` 파일과 `target` 폴더를 삭제한 뒤 재빌드한다.
+
+2. 서버를 실행하거나 예상한 응답을 받은데 어려움이 있다면 별도의 `.env` 파일(`tutor-web-app-ssr`과 `tutor-web-service`)이 각 프로젝트에 존재하며, 해당 파이들이 각각 `HOST_PORT`, `DATABASE_URL` 값을 갖고 있는지 확인한다.
+
+3. 데이터베이스에서 데이터를 가져오는 과정에서 에러가 발생한다면 Postgres에서 테이블을 생성하는 데이터베이스 스크립트가 실행되었는지 확인한다.

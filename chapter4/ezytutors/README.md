@@ -1,53 +1,52 @@
-## Code for Chapter 4
+## 4장 샘플 코드
 
-### What does this repo contain?
+### 이 저장소에 포함된 것들
 
-Code for chapter 4 of the book.
+이 저장소는 4장의 샘플 코드를 포함한다. 코드를 실행하려면 `chapter4/ezytutors/tutor-db` 폴더로 이동한다. 이 폴더가 프로젝트 루트이다.
 
-To run:
+### 이터레이션 1
 
-Go to folder chapter4/ezytutors/tutor-db. This is the project root.
-
-### Iteration 1
-
-To run iteration 1:
+이터레이션 1을 실행하려면 다음 명령을 실행한다.
 
 ```
 cargo run --bin iter1
 ```
-Ensure the project root contains .env file that contains database access credentials.
-Note: The .env file contained in this repo is for learning purposes only. For production, ensure .env is not checked into git repo (include the file in .gitignore).
 
-### Iteration 2
+프로젝트 루트에 `.env` 파일이 있는지 확인한다. 이 파일은 데이터베이스 접근 크리덴셜을 포함한다.
 
-To check whether iter2 compiles:
+노트: 이 저장소에 포함된 `.env` 파일은 학습 목적으로만 제공된다. 프러덕션 환경의 `.env`는 깃 저장소에 업로드해서는 안 된다(해당 파일은 `.gitignore`에 포함되어야 한다).
+
+### 이터레이션 2
+
+`iter2`가 컴파일되는지 확인한다.
 
 ```
 cargo check --bin iter2
 ```
 
-To run unit tests for iteration 2: 
+이터레이션 2에 대한 단위 테스트를 실행한다.
 
 ```
 cargo test --bin iter2
 ```
 
-### Iteration 3
+### 이터레이션 3
 
-Run the web service with:
+웹 서비스를 실행한다:
 
 ```
 cargo run --bin iter3
 ```
-From a browser (or using curl):
 
-To retrieve all courses for tutor-id = 1:
+브라우저에서(혹은 curl을 이요해서),
+
+`tutor-id=1`에 대한 모든 강의 정보를 얻어온다
 
 ```
 http://localhost:3000/courses/1
 ```
 
-To post a new course :
+새로운 강의를 개설한다.
 
 ```
 curl -X POST localhost:3000/courses/ \
@@ -55,21 +54,21 @@ curl -X POST localhost:3000/courses/ \
 -d '{"tutor_id":1, "course_id":4, "course_name":"Fourth course"}'
 ```
 
-For retrieving course details for tutor-id =1 and course-id=4
+`tutor-id=1` 및 `course-id=4`인 강의의 세부 정보를 얻어온다.
+
 ```
 http://localhost:3000/courses/1/2
 ```
 
-To run automated unit tests:
+자동화된 단위 테스트를 실행한다.
 
 ```
 cargo test --bin iter3
 ```
 
-To repeat the unit tests, run the clean-up script first and then run the unit tests, as shown:
+단위 테스트를 반복할 때는 먼저 클린 업 스크립트를 실행한 뒤 단위 테스트를 실행해야 한다.
 ```
 psql -U $DATABASE_USER -d ezytutors --password < $PROJECT_ROOT/iter3-test-clean.sql
 cargo test --bin iter3
-
 ```
 

@@ -1,5 +1,5 @@
 
-// Listing 8.1 - start
+// Listing 8.1 - 시작
 
 use serde::{Deserialize, Serialize};
 
@@ -28,4 +28,4 @@ pub struct User {
     pub user_password: String,
 }
 
-// Listing 8.1 - end
+// Listing 8.1 - 끝
