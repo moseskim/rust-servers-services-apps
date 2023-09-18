@@ -86,7 +86,7 @@ mod tests {
         let resp = get_courses_for_tutor(app_state, tutor_id).await.unwrap();
         assert_eq!(resp.status(), StatusCode::OK);
     }
-    // 유효한 강의id에 대한 모든 강의 상세 정보를 얻는다
+    // 유효한 강의 id에 대한 모든 강의 상세 정보를 얻는다
     #[actix_rt::test]
     async fn get_course_detail_success_test() {
         dotenv().ok();
