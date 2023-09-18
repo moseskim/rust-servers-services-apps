@@ -1,40 +1,40 @@
-## Code for Chapter 3
+## 3장 샘플 코드
 
-### What does this repo contain?
+### 이 저장소에 포함된 것들
 
-#### This repo contains two projects - basic-server and tutor-service.
+#### 이 저장소는 2개의 프로젝트(basic-server와 tutor-service)를 포함한다
 
-- For both projects, clone this repo and cd into the directory. This is the workspace root folder.
+- 두 프로젝트를 진행하려면 이 저장소를 클론한 뒤, 해당 디렉터리로 이동한다. 이 디렉터리가 워크스페이스의 루트 폴더이다.
 
-### How to test and run the basic-server
+### basic-server 테스트 및 실행 방법
 
-1. From one terminal window, run from workspace root:
+1. 한 터미널 창에서, 워크스프페이스 루트에서 다음을 실행한다.
 
 ```
 cargo run -p tutor-nodb --bin basic-server
 ```
 
-2. From a web browser access the following URI:
+2. 웹 브라우저에서 다음 URI로 접근한다
 
 ```
 http://localhost:3000/health
 ```
 
-You should see a web page displayed with the following message:
+다음 메시지를 포함하는 웹 페이지를 확이할 수 있다.
 
 ```
 "Hello. EzyTutors is alive and kicking"
 ```
 
-### How to test and run the tutor-service project
+### tutor-service 프로젝트 테스트 및 실행 방법
 
-1. From a terminal window, run from workspace root:
+1. 한 터미널 창에서, 워크스페이스 루트에서 다음을 실행한다.
 
 ```
 cargo run -p tutor-nodb --bin tutor-service
 ```
 
-2. From a new terminal window, run the following command to post a few courses:
+2. 새로운 터미널 창에서 다음 명령어를 실행해서 몇 개의 강의를 개설한다.
 
 ```
 curl -X POST localhost:3000/courses/ -H "Content-Type: application/json" -d '{"tutor_id":1, "course_name":"Hello , my first course !"}'
@@ -43,7 +43,7 @@ curl -X POST localhost:3000/courses/ -H "Content-Type: application/json" -d '{"t
 
 ```
 
-2. From a web browser, access the following URIs:
+3. 웹 브라우저에서 다음 URI에 접속한다.
 
 ```
 localhost:3000/health
@@ -51,31 +51,31 @@ localhost:3000/courses/1
 localhost:3000/courses/1/1
 ```
 
-For the first URI, you should see a message similar to this. The visitor count will increment everytime you refresh the browser screen
+첫 번재 URI에서는 다음과 유사한 메시지를 확인할 수 있다. 방문자 카운트는 브라우저 화면을 새로고침할 때마다 증가한다.
 
 ```
 "I'm good. You've already asked me  1 times"
 ```
 
-For the second URI, you should see the following:
+두 번째 URI에서는 다음을 확인할 수 있다.
 
 ```
 [{"tutor_id":1,"course_id":1,"course_name":"Hello , my first course !","posted_time":"2020-10-30T10:24:16.985954"},{"tutor_id":1,"course_id":2,"course_name":"Hello , my second course !","posted_time":"2020-10-30T10:24:17.013067"},{"tutor_id":1,"course_id":3,"course_name":"Hello , my third course !","posted_time":"2020-10-30T10:24:17.907214"}]
 ```
 
-For the third URI, you should see the following:
+세 번째 URI에서는 다음을 확인할 수 있다.
 
 ```
 {"tutor_id":1,"course_id":1,"course_name":"Hello , my first course !","posted_time":"2020-10-30T10:24:16.985954"}
 ```
 
-3. To just run the tests for tutor-service, from the workspace root:
+4. tutor-service에 대한 테스트만 실행할 때는 워크스페이스 루트에서 다음을 실행한다.
 
 ```
 cargo test -p tutor-nodb
 ```
 
-You should see the following message displayed:
+다음과 같은 메시지가 표시되는 것을 확인할 수 있다.
 
 ```
 running 3 tests
